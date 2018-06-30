@@ -8,6 +8,7 @@ const Todo = (props) => {
     <View style={styles.leftContainer}>
       <Text style={styles.todoTitle}>{todo.title}</Text>
       <Text style={styles.todoDescription}>{todo.description}</Text>
+      <Text style={styles.todoFullname}>{todo.fullname}</Text>
     </View>
   )
 }

@@ -17,18 +17,29 @@ const styles = StyleSheet.create({
   },
   leftContainer: {
     flex: 3,
-    marginRight: 10
+    marginRight: 10,
+    display: 'flex',
+    flexDirection: 'column'
   },
   rightContainer: {
     display: 'flex',
     flexDirection: 'column'
   },
   todoTitle: {
+    flex: 1,
     fontWeight: 'bold',
-    fontSize: 16
+    fontSize: 14,
+    marginBottom: 5
   },
   todoDescription: {
-    fontSize: 14
+    fontSize: 14,
+    flex: 3,
+    marginBottom: 5
+  },
+  todoFullname: {
+    fontSize: 12,
+    color: '#a066ca',
+    flex: 1
   },
   formContainer: {
     backgroundColor: '#fff',
@@ -85,6 +96,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     padding: 10
   },
+  inputFullname: {
+    padding: 10
+  },
   inputEmail: {
     padding: 10
   },
@@ -118,6 +132,12 @@ const styles = StyleSheet.create({
   errorMessage: {
     padding: 10,
     color: 'red'
+  },
+  welcomeUser: {
+    color: '#000',
+    fontSize: 14,
+    marginBottom: 10,
+    textAlign: 'center'
   }
 })
 

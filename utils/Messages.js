@@ -12,6 +12,8 @@ const messages = {
   SIGN_OUT: 'You have already signed out',
   TITLE_FILL: 'Fill the title',
   DESCRIPTION_FILL: 'Fill the description',
+  FULLNAME_BLANK: 'Fullname still blank',
+  FULLNAME_FILL: 'Fill the fullname',
 }
 
 export default messages

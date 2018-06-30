@@ -70,7 +70,7 @@ class HomeScreen extends React.Component {
       })
     } else {
       const newTodoKey = firebase.database().ref().child('todos').push().key
-      const todo = { title: title, description: description, user_id: user.uid }
+      const todo = { title: title, description: description, user_id: user.uid, fullname: user.displayName }
       firebase.database().ref('todos/').update({
         [newTodoKey]: todo
       })
@@ -112,6 +112,7 @@ class HomeScreen extends React.Component {
   }
 
   render() {
+    let user = this.state.user ? Object.create(this.state.user) : {}
     const todos = this.state.todos ? Object.keys(this.state.todos).map(key => {
       return {
         key: key,
@@ -121,6 +122,7 @@ class HomeScreen extends React.Component {
 
     return (
       <View style={styles.appContainer}>
+        <Text style={styles.welcomeUser}>Welcome, {user.displayName}</Text>
         <View style={styles.formContainer}>
           <TextInput
             placeholder={messages.TITLE_FILL}

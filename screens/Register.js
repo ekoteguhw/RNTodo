@@ -13,6 +13,7 @@ class RegisterScreen extends React.Component {
   constructor() {
     super()
     this.state = {
+      fullname: '',
       email: '',
       password: '',
       errorMessage: ''
@@ -20,8 +21,12 @@ class RegisterScreen extends React.Component {
   }
 
   _register = () => {
-    let { email, password } = this.state
-    if (!email) {
+    let { fullname, email, password } = this.state
+    if (!fullname) {
+      this.setState({
+        errorMessage: messages.FULLNAME_BLANK
+      })
+    } else if (!email) {
       this.setState({
         errorMessage: messages.EMAIL_BLANK
       })
@@ -32,9 +37,14 @@ class RegisterScreen extends React.Component {
     } else {
       firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(() => {
-          this.setState({ errorMessage: '' })
-          this.props.navigation.navigate('Home')
-          Alert.alert('Success', messages.ACCOUNT_CREATE_SUCCESS)
+          let user = firebase.auth().currentUser
+          user.updateProfile({
+            displayName: fullname
+          }).then(() => {
+            this.setState({ errorMessage: '' })
+            this.props.navigation.navigate('Home')
+            Alert.alert('Success', messages.ACCOUNT_CREATE_SUCCESS)
+          }).catch(err => { this.setState({ errorMessage: err.message }) })
         })
         .catch(err => {
           this.setState({ errorMessage: err.message })
@@ -46,6 +56,13 @@ class RegisterScreen extends React.Component {
     return (
       <View style={styles.registerContainer}>
         <View style={styles.formContainer}>
+          <TextInput
+            placeholder={messages.FULLNAME_FILL}
+            onChangeText={(text) => this.setState({ fullname: text })}
+            keyboardType="default"
+            autoCapitalize="none"
+            style={styles.inputFullname}
+          />
           <TextInput
             placeholder={messages.EMAIL_FILL}
             onChangeText={(text) => this.setState({ email: text })}
