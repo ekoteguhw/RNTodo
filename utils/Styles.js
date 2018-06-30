@@ -30,9 +30,6 @@ const styles = StyleSheet.create({
   todoDescription: {
     fontSize: 14
   },
-  listContainer: {
-
-  },
   formContainer: {
     backgroundColor: '#fff',
     marginBottom: 10,
@@ -79,6 +76,48 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#fff',
     padding: 10
+  },
+  loginContainer: {
+    display: 'flex',
+    padding: 10
+  },
+  registerContainer: {
+    display: 'flex',
+    padding: 10
+  },
+  inputEmail: {
+    padding: 10
+  },
+  inputPassword: {
+    padding: 10
+  },
+  buttonLogin: {
+    alignItems: 'center',
+    backgroundColor: '#a066ca',
+    borderRadius: 5,
+    marginBottom: 10
+  },
+  textLogin: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#fff',
+    padding: 10
+  },
+  buttonRegister: {
+    alignItems: 'center',
+    backgroundColor: '#a066ca',
+    borderRadius: 5,
+    marginBottom: 10
+  },
+  textRegister: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#fff',
+    padding: 10
+  },
+  errorMessage: {
+    padding: 10,
+    color: 'red'
   }
 })
 
