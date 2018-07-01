@@ -28,9 +28,11 @@ class HomeScreen extends React.Component {
       todos: [],
       title: '',
       description: '',
+      user_id: '',
+      fullname: '',
       key: '',
       isUpdate: false,
-      user: null,
+      user: {},
       errorMessage: ''
     }
   }
@@ -74,20 +76,20 @@ class HomeScreen extends React.Component {
       firebase.database().ref('todos/').update({
         [newTodoKey]: todo
       })
-      this.setState({ title: '', description: '', errorMessage: '' })
+      this.setState({ title: '', description: '', errorMessage: '', isUpdate: false })
       Alert.alert('Success', messages.TODO_CREATE_SUCCESS)
     }
   }
 
   _getTodo = (key) => {
     firebase.database().ref('todos/' + key).on('value', snapshot => {
-      const todo = snapshot.val()
-      this.setState({ title: todo.title, description: todo.description, key: key, isUpdate: true })
+      const todo = Object.create(snapshot.val())
+      this.setState({ title: todo.title, description: todo.description, user_id: todo.user_id, fullname: todo.fullname, key: key, isUpdate: true })
     })
   }
 
   _updateTodo = (key) => {
-    let { title, description } = this.state
+    let { title, description, user_id, fullname } = this.state
     if (!title) {
       this.setState({
         errorMessage: messages.TITLE_BLANK
@@ -98,8 +100,10 @@ class HomeScreen extends React.Component {
       })
     } else {
       firebase.database().ref('todos/' + key).set({
-        title: this.state.title,
-        description: this.state.description
+        title: title,
+        description: description,
+        user_id: user_id,
+        fullname: fullname
       })
 
       this.setState({ title: '', description: '', key: '', isUpdate: false, errorMessage: '' })
@@ -109,6 +113,8 @@ class HomeScreen extends React.Component {
 
   _removeTodo = (key) => {
     firebase.database().ref('todos/' + key).remove()
+    this.setState({ isUpdate: false })
+    Alert.alert('Success', messages.TODO_DELETE_SUCCESS)
   }
 
   render() {
@@ -132,6 +138,7 @@ class HomeScreen extends React.Component {
           />
           <TextInput
             placeholder={messages.DESCRIPTION_FILL}
+            multiline={true}
             onChangeText={(text) => this.setState({ description: text })}
             value={this.state.description}
             style={styles.inputDescription}

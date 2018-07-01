@@ -4,7 +4,7 @@ const messages = {
   TITLE_BLANK: 'Title still blank',
   DESCRIPTION_BLANK: 'Description still blank',
   TODO_CREATE_SUCCESS: 'Success create new Todo',
-  TODO_UPDATE_SUCCESS: 'Success update Todo',
+  TODO_UPDATE_SUCCESS: 'Success update Todo', TODO_DELETE_SUCCESS: 'Success delete Todo',
   ACCOUNT_CREATE_SUCCESS: 'You have already registered',
   EMAIL_FILL: 'Fill your email',
   PASSWORD_FILL: 'Fill your password',
